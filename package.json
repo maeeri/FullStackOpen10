@@ -14,17 +14,20 @@
     "@expo/webpack-config": "^0.17.0",
     "expo": "~46.0.17",
     "expo-status-bar": "~1.4.0",
+    "formik": "^2.2.9",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-native": "^0.69.6",
-    "react-native-web": "^0.18.10"
+    "react-native-web": "^0.18.10",
+    "react-router-native": "^6.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/eslint-parser": "^7.19.1",
     "eslint": "^8.27.0",
     "eslint-plugin-react": "^7.31.10",
-    "eslint-plugin-react-native": "^4.0.0"
+    "eslint-plugin-react-native": "^4.0.0",
+    "prettier": "2.7.1"
   },
   "private": true
 }
