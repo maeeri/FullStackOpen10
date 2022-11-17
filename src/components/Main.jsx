@@ -3,6 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-native'
 import RepositoryList from './RepositoryList'
 import SignIn from './SignIn'
 import AppBar from './AppBar'
+import WhatIsMyPlatform from './WhatIsMyPlatform'
 import { Container } from './UtilComponents'
 
 
@@ -12,11 +13,10 @@ const Main = () => {
   return (
     <Container>
       <AppBar />
+      <WhatIsMyPlatform />
       <Routes>
-        {console.log('routes')}
-        
-        <Route path="/" element={<RepositoryList />} exact />
-        <Route path="/signin" element={<SignIn title={'sign in here'} />} exact />
+        <Route path="/" element={<RepositoryList />} />
+        <Route path="/signin" element={<SignIn title={'sign in here'} />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Container>

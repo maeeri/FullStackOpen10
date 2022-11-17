@@ -15,6 +15,13 @@ const styles = StyleSheet.create({
     fontFamily: theme.fonts.main,
     fontWeight: theme.fontWeights.normal,
   },
+  textInput: {
+    padding: 3,
+    paddingLeft: 3,
+    marginTop: 3,
+    borderWidth: 1,
+    borderRadius: 5,
+  },
   colorTextSecondary: {
     color: theme.colors.textSecondary,
   },
@@ -66,10 +73,13 @@ const styles = StyleSheet.create({
     flexGrow: 0,
     flexShrink: 0,
   },
-  blueBtn: {
-    backgroundColor: theme.colors.primary,
+  btn: {
+    textAlign: 'auto',
     padding: 8,
     borderRadius: 8,
+  },
+  blueBtn: {
+    backgroundColor: theme.colors.primary,
     color: theme.colors.colorWhite,
   },
 })
@@ -88,11 +98,12 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
   return <NativeText style={textStyle} {...props} />
 }
 
-const Container = (props) => {
-  return <View style={styles.flexContainer}>{props.children}</View>
+const Container = ({ style, ...props }) => {
+  const containerStyle = [styles.flexContainer, style]
+  return <View style={containerStyle}>{props.children}</View>
 }
 
-const Row = (style, ...props) => {
+const Row = ({ style, ...props }) => {
   const rowStyle = [
     props.itemNumber === 2 && styles.flexRowTwo,
     props.itemNumber === 4 && styles.flexRowFour,
@@ -104,7 +115,7 @@ const Row = (style, ...props) => {
   return <View style={rowStyle}>{props.children}</View>
 }
 
-const Column = (style, ...props) => {
+const Column = ({ style, ...props }) => {
   const columnStyle = [styles.flexColumn, style]
   return <View style={columnStyle}>{props.children}</View>
 }
@@ -113,6 +124,8 @@ const Button = ({ style, onPress, color, text, background }) => {
   const btnStyle = [
     background === 'blue' && styles.blueBtn,
     styles.flexItemFitContent,
+    styles.btn,
+    // { justifyContent: 'center' },
     style,
   ]
 
@@ -127,7 +140,7 @@ const Button = ({ style, onPress, color, text, background }) => {
 
 //eslint-disable-next-line no-unused-vars
 const TextInput = ({ style, error, ...props }) => {
-  const textInputStyle = [style]
+  const textInputStyle = [styles.textInput, style]
 
   return <NativeTextInput style={textInputStyle} {...props} />
 }

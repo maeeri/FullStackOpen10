@@ -20,7 +20,6 @@ const RepositoryItem = ({ item }) => {
 
   return (
     <View style={styles.card}>
-      {console.log('card')}
       <Row itemNumber={2}>
         <Avatar url={item.ownerAvatarUrl} />
         <Column>
