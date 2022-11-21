@@ -1,5 +1,5 @@
 import { View, StyleSheet } from 'react-native'
-import { Text, Button, Column, Row } from './UtilComponents'
+import { Text, Button, Column, Row } from '../UtilComponents'
 import Avatar from './Avatar'
 
 const styles = StyleSheet.create({
