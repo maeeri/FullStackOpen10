@@ -4,7 +4,7 @@ import Avatar from './Avatar'
 
 const styles = StyleSheet.create({
   card: {
-    background: 'white',
+    backgroundColor: 'white',
     marginBottom: 20,
   },
 })
@@ -14,12 +14,13 @@ const changeThousands = (number) => {
 }
 
 const RepositoryItem = ({ item }) => {
-  const stars = changeThousands(item.stargazersCount)
-  const forks = changeThousands(item.forksCount)
-  const reviews = changeThousands(item.reviewCount)
+  if (!item) return null
+  const stars = changeThousands(item?.stargazersCount)
+  const forks = changeThousands(item?.forksCount)
+  const reviews = changeThousands(item?.reviewCount)
 
   return (
-    <View style={styles.card}>
+    <View style={styles.card} testID="repositoryItem">
       <Row itemNumber={2}>
         <Avatar url={item.ownerAvatarUrl} />
         <Column>

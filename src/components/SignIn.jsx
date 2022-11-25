@@ -1,11 +1,11 @@
-// import { Text, TextInput, Column, Button } from './UtilComponents'
+import { Text, Button } from './UtilComponents'
 import { Formik } from 'formik'
 import { View, StyleSheet } from 'react-native'
 import FormikTextInput from './FormikTextInput'
-import { Button } from './UtilComponents'
 import * as yup from 'yup'
 import useSignIn from '../hooks/useSignIn'
-import { useNavigate } from "react-router-native"
+import { useNavigate } from 'react-router-native'
+import { useState } from 'react'
 
 const signInStyle = StyleSheet.create({
   margin: 15,
@@ -19,7 +19,7 @@ const validationSchema = yup.object().shape({
 const SignInForm = ({ onSubmit }) => {
   return (
     <View style={signInStyle}>
-      <FormikTextInput name="username" placeholder="username" />
+      <FormikTextInput autoCapitalize="none" name="username" placeholder="username" />
       <FormikTextInput
         secureTextEntry={true}
         name="password"
@@ -35,30 +35,38 @@ const SignInForm = ({ onSubmit }) => {
   )
 }
 
-const SignIn = () => {
+export const SignInContainer = ({ title, onSubmit }) => {
+  return (
+    <>
+      <Text>{title}</Text>
+      <Formik
+        initialValues={{ username: '', password: '' }}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+      </Formik>
+    </>
+  )
+}
+
+const SignIn = ({ title }) => {
   const [signIn] = useSignIn()
   const navigate = useNavigate()
-
+  const [error, setError] = useState(false)
 
   const onSubmit = async (values) => {
     const { username, password } = values
     try {
       await signIn({ username, password })
+      setError(false)
     } catch (e) {
       console.log(e)
+      setError(true)
     }
-    navigate("/", {replace: true})
+    !error && navigate('/', { replace: true })
   }
-
-  return (
-    <Formik
-      initialValues={{ username: '', password: '' }}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
-    </Formik>
-  )
+  return <SignInContainer onSubmit={onSubmit} title={title} />
 }
 
 export default SignIn

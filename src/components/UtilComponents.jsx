@@ -80,8 +80,10 @@ const styles = StyleSheet.create({
   },
   blueBtn: {
     backgroundColor: theme.colors.primary,
-    color: theme.colors.colorWhite,
   },
+  redBtn: {
+    backgroundColor: theme.colors.error,
+  }
 })
 
 const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
@@ -116,23 +118,23 @@ const Row = ({ style, ...props }) => {
 }
 
 const Column = ({ style, ...props }) => {
-  const columnStyle = [styles.flexColumn, style]
+  const columnStyle = [styles.flexColumn, styles.flexItemFitContent, style]
   return <View style={columnStyle}>{props.children}</View>
 }
 
-const Button = ({ style, onPress, color, text, background }) => {
+const Button = ({ style, onPress, color, text, background, ...props }) => {
   const btnStyle = [
     background === 'blue' && styles.blueBtn,
+    background === 'red' && styles.redBtn,
     styles.flexItemFitContent,
     styles.btn,
-    // { justifyContent: 'center' },
     style,
   ]
 
   return (
     <View>
       <Pressable onPress={onPress} style={btnStyle}>
-        <Text color={color}>{text}</Text>
+        <Text color={color} {...props}>{text}</Text>
       </Pressable>
     </View>
   )

@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 })
 
 const AppBar = () => {
-  const { me } = useMe()
+  const { user } = useMe({includeReviews: false})
   const authStorage = useAuthStorage()
   const apolloClient = useApolloClient()
 
@@ -39,7 +39,7 @@ const AppBar = () => {
             </Text>
           </Link>
         </Pressable>
-        {!me && (
+        {!user && (
           <Pressable>
             <Link to="/signin" style={styles.item}>
               <Text color={'white'} fontSize={'subheading'} fontWeight={'bold'}>
@@ -48,7 +48,34 @@ const AppBar = () => {
             </Link>
           </Pressable>
         )}
-        {me && (
+        {!user && (
+          <Pressable>
+            <Link to="/signup" style={styles.item}>
+              <Text color={'white'} fontSize={'subheading'} fontWeight={'bold'}>
+                Sign up
+              </Text>
+            </Link>
+          </Pressable>
+        )}
+        {user && (
+          <Pressable>
+            <Link to="/addreview" style={styles.item}>
+              <Text color={'white'} fontSize={'subheading'} fontWeight={'bold'}>
+                Create a review
+              </Text>
+            </Link>
+          </Pressable>
+        )}
+        {user && (
+          <Pressable>
+            <Link to="/myreviews" style={styles.item}>
+              <Text color={'white'} fontSize={'subheading'} fontWeight={'bold'}>
+                My reviews
+              </Text>
+            </Link>
+          </Pressable>
+        )}
+        {user && (
           <Pressable onPress={signout}>
             <Text color={'white'} fontSize={'subheading'} fontWeight={'bold'}>
               Sign out
