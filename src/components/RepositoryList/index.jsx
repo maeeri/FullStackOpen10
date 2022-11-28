@@ -17,8 +17,13 @@ export const ItemSeparator = () => <View style={styles.separator} />
 
 export class RepositoryListContainer extends React.Component {
   renderHeader = () => {
-    const { onChangeSearch, searchQuery, selectOptions, handleChange } =
-      this.props
+    const { onChangeSearch, searchQuery, handleChange } = this.props
+
+    const selectOptions = [
+      'Latest repositories',
+      'Highest rated repositories',
+      'Lowest rated repositories',
+    ]
 
     return (
       <>
@@ -48,7 +53,7 @@ export class RepositoryListContainer extends React.Component {
       ? repositories.edges.map((edge) => edge.node)
       : []
 
-      // console.log(repositoryNodes.length)
+    // console.log(repositoryNodes.length)
 
     return (
       <FlatList
@@ -76,12 +81,6 @@ const RepositoryList = () => {
   const [searchKeyword] = useDebounce(query, 500)
   const navigate = useNavigate()
 
-  const selectOptions = [
-    'Latest repositories',
-    'Highest rated repositories',
-    'Lowest rated repositories',
-  ]
-
   const handleChange = (value) => {
     const orderBy =
       value === 'Latest repositories' ? 'CREATED_AT' : 'RATING_AVERAGE'
@@ -106,7 +105,6 @@ const RepositoryList = () => {
         repositories={repositories}
         onEndReach={onEndReach}
         onChangeSearch={handleSearchChange}
-        selectOptions={selectOptions}
         handleChange={handleChange}
         navigate={navigate}
       />
